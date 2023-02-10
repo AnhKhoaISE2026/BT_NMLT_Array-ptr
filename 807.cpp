@@ -25,7 +25,6 @@ int main()
 	}
 	return 0;
 }
-
 void StringReverse(char a[])
 {
 	const int lena = myStrlen(a, 0);
@@ -36,4 +35,65 @@ void StringReverse(char a[])
 	char word_ctn[m][n]{};
 
 	int iword, i;
-	for (i = 0, iword = 0; i < l
+	for (i = 0, iword = 0; i < lena; i++)
+	{
+		int x;
+		if (a[i] == ' ')
+		{
+			for (i, x = 0; a[i] == ' ' && i < lena; i++, x++)
+			{
+				word_ctn[iword][x] = a[i];
+			}
+			iword++;
+			i--;
+		}
+		else
+		{
+			for (i, x = 0; a[i] != ' ' && i < lena; i++, x++)
+			{
+				word_ctn[iword][x] = a[i];
+			}
+			iword++;
+			i--;
+		}
+	}
+
+	for (i = 0, iword = iword - 1; i < lena; i++, iword--)
+	{
+		int x, len;
+		for (i, x = 0, len = myStrlen(word_ctn[iword], 0);
+			 x < len;
+			 i++, x++)
+		{
+			a[i] = word_ctn[iword][x];
+		}
+		i--;
+	}
+}
+
+int myStrlen(char a[], int k)
+{
+	for (int i = k;; i++)
+	{
+		if (a[i] == '\0' || a[i] == '\n' || a[i] == '\r')
+		{
+			return i;
+		}
+	}
+}
+
+int myStrcmp(char a[], char b[])
+{
+	const int lena = myStrlen(a, 0);
+	const int lenb = myStrlen(b, 0);
+
+	for (int i = 0; i < lena || i < lenb; i++)
+	{
+		if (a[i] != b[i])
+		{
+			return a[i] - b[i];
+		}
+	}
+
+	return 0;
+}
